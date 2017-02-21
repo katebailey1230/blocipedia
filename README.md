@@ -1,1 +1,1 @@
-# new-rails-project
+# blocipedia
