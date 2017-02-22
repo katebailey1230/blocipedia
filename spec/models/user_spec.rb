@@ -12,4 +12,3 @@ RSpec.describe User, type: :model do
             expect(user).to respond_to(:role)
         end
     end
-end
