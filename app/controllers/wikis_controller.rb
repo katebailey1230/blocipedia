@@ -1,6 +1,7 @@
 class WikisController < ApplicationController
   
-  before_action :authenticate_user!
+    before_action :authenticate_user!, except: :show
+  before_action :require_sign_in, except: :show
   
   def index
     @wikis = Wiki.all
@@ -20,7 +21,7 @@ class WikisController < ApplicationController
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
      @wiki.private = params[:wiki][:private]
-
+     @wiki.user = current_user
 
      if @wiki.save
 

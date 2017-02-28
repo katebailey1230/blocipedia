@@ -4,6 +4,11 @@ include RandomData
 RSpec.describe WikisController, type: :controller do
 
     let(:my_wiki) { Wiki.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, private: false) }
+    
+    context "signed-in user" do
+     before do
+       create_session(my_wiki.user)
+     end
  
    describe "GET show" do
      it "returns http success" do
@@ -139,5 +144,5 @@ RSpec.describe WikisController, type: :controller do
        expect(response).to redirect_to wikis_path
      end
    end    
-   
+end 
 end
