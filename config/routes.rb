@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   get 'about' => 'welcome#about'
   
   devise_for :users
-  resources :users, only: [:show]
+  resources :users
   resources :charges, only: [:new, :create]  
+  resources :wikis
     
   get 'welcome/index'
 

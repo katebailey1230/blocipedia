@@ -43,7 +43,8 @@ class WikisController < ApplicationController
      @wiki.title = params[:wiki][:title]
      @wiki.body = params[:wiki][:body]
      @wiki.private = params[:wiki][:private]
- 
+     @wiki.user_id = current_user.id
+       
      if @wiki.save
        flash[:notice] = "Wiki was updated."
        redirect_to @wiki
@@ -52,6 +53,7 @@ class WikisController < ApplicationController
        render :edit
      end
    end
+    
    def destroy
      @wiki = Wiki.find(params[:id])
  

@@ -44,8 +44,8 @@ def downgrade
     )
 
       rescue Stripe::CardError => e
-      flash[:error] = e.message
-      redirect_to new_charge_path
+      flash[:notice] = "Your account been downgraded to standard."
+    redirect_to edit_user_registration_path
    end    
      private
 
