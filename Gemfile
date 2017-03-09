@@ -12,6 +12,7 @@ source 'https://rubygems.org'
 
  group :development do
   gem 'sqlite3', '~> 1.3', '>= 1.3.13'
+  gem 'letter_opener' 
  end
 
  group :development, :test do
@@ -34,3 +35,4 @@ source 'https://rubygems.org'
  gem 'bootstrap-sass'
  gem 'devise'
  gem 'pundit'
+ gem 'stripe'
