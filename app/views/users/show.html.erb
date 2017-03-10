@@ -8,7 +8,7 @@
      <% if @user.standard? %>
      <%= render "charges/new"  %>
      <% elsif @user.premium? %>
-     <%= render "users/downgrade"  %>
+     <%= render "registrations/edit"  %>
      <% end %>
    </div>
  </div>

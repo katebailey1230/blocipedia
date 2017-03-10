@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
     has_many :wikis
     enum role: [:standard, :premium, :admin]
     
-    after_initialize :init
+    after_initialize :check_role
     
-    def init
-       self.role  ||= :standard           
+    def check_role
+       self.role ||= :standard           
      end
     
   # Include default devise modules. Others available are:

@@ -1,12 +1,14 @@
 class ChargesController < ApplicationController
+      
     
-after_action :upgrade_account, only: [:create]
-after_action :downgrade_account, only: [:downgrade]    
+  def new
+    if current_user.premium?
+      flash[:message] = "You are already a premium user."
+      redirect_to root_path
+    end
+  end
     
-def new
- end
-    
-def create
+  def create
 
     @amount = 15_00
 
@@ -21,39 +23,33 @@ def create
       :description => 'Premium Account',
       :currency    => 'usd'
     )
+    current_user.premium!
 
+    flash[:notice] = "Thanks for all the money, #{current_user.email}! Your account has been upgraded to premium."
+    redirect_to edit_user_registration_path
+    
       rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to new_charge_path
-   end
+  end
 
-def downgrade
+  def downgrade
 
     @amount = -15_00
 
-    customer = Stripe::Customer.change(
-      :email => params[:stripeEmail],
-      :source  => params[:stripeToken]
-    )
+    current_user.standard!
 
-    charge = Stripe::Charge.change(
-      :customer    => customer.id,
-      :amount      => -15_00,
-      :description => 'Standard Account',
-      :currency    => 'usd'
-    )
-
-      rescue Stripe::CardError => e
-      flash[:notice] = "Your account been downgraded to standard."
+    flash[:notice] = "Your account been downgraded to standard."
     redirect_to edit_user_registration_path
-   end    
-     private
-
-   def upgrade_account
-       current_user.update_attribute(:role, 'premium')
-   end
     
-    def downgrade_account
-       current_user.update_attribute(:role, 'standard')
-   end
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to download_path
   end
+
+  private
+
+  def charges_params
+    params.require(:charges).permit(:stripeToken, :amount)
+  end
+end
