@@ -18,3 +18,11 @@ end
   )
 wiki = Wiki.all
 end
+
+Wiki.create!(
+  title: 'My First Markdown Wiki',
+  body:
+  %Q{### There Is Something You Should Know!
+  This is my very first post using markdown!
+  user_id: User.sample.id
+)
