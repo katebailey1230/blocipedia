@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :charges
   
   resources :wikis
+  
+  resources :collaborators
     
   get 'downgrade' => 'charges#downgrade'
   

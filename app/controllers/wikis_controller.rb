@@ -1,12 +1,12 @@
 class WikisController < ApplicationController
   
     before_action :authenticate_user!, except: :show
-  before_action :require_sign_in, except: :show
+    before_action :require_sign_in, except: :show
   
   def index
-    @wikis = Wiki.all
-  end
-
+     @wikis = policy_scope(Wiki)
+   end
+  
   def show
     @wiki = Wiki.find(params[:id])
   end

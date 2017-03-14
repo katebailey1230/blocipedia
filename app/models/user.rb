@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
     has_many :wikis
+    has_many :collaborators
     enum role: [:standard, :premium, :admin]
     
     after_initialize :check_role
