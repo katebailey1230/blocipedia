@@ -9,6 +9,11 @@ require 'random_data'
  users = User.all
 end
 
+5.times do
+   collaborator = Collaborator.create!(user_id: User.all.sample.id, wiki_id: User.all.sample.id)
+ collaborators = Collaborator.all
+end
+
 25.times do
   Wiki.create!(
     title: Faker::Beer.unique.name,
@@ -27,3 +32,4 @@ Wiki.create!(
   How do you like it?},
   user_id: User.all.sample.id
 )
+
