@@ -5,7 +5,7 @@ source 'https://rubygems.org'
  
 
  group :production do
-   gem 'pg', '~> 0.19.0'
+   gem 'pg', '~> 1.2.1'
    gem 'rails_12factor'
  end
  
